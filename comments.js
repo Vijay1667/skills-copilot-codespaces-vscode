@@ -1,17 +1,38 @@
-// Purpose: to create a web server
-// run it in the terminal with node comments.js
-// then go to http://localhost:3000/
+// Create web server
 
-// create a web server
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const app = express();
+const port = 4001;
 
-// create a route
-app.get('/', (req, res) => {
-  res.send('Hello World');
+app.use(cors());
+app.use(bodyParser.json());
+
+const commentsByPostId = {};
+
+app.get('/posts/:id/comments', (req, res) => {
+  res.send(commentsByPostId[req.params.id] || []);
 });
 
-// listen on a port
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+app.post('/posts/:id/comments', (req, res) => {
+  const { id } = req.params;
+  const { content } = req.body;
+
+  if (!commentsByPostId[id]) {
+    commentsByPostId[id] = [];
+  }
+
+  commentsByPostId[id].push({ id: generateId(), content, status: 'pending' });
+
+  res.status(201).send(commentsByPostId[id]);
 });
+
+app.listen(port, () => {
+  console.log(`Comments server listening on port ${port}`);
+});
+
+const generateId = () => {
+  return Math.floor(Math.random() * 99999);
+};
