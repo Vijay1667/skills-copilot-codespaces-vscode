@@ -1,4 +1,4 @@
-// create a basic web server
+// Purpose: to create a web server
 // run it in the terminal with node comments.js
 // then go to http://localhost:3000/
 
