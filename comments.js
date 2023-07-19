@@ -5,12 +5,12 @@
 // npm install --save express
 // Create a server.js file in the root of your application directory
 // In server.js, add the following code:
-// var express = require('express');
-// var app = express();
-// var port = process.env.PORT || 3000;
-// app.use(express.static(__dirname + '/app'));
-// app.listen(port);
-// console.log('Listening on port: ' + port);
+var express = require('express');
+var app = express();
+var port = process.env.PORT || 3000;
+app.use(express.static(__dirname + '/app'));
+app.listen(port);
+console.log('Listening on port: ' + port);
 // Start the server
 // node server.js
 // Navigate to http://localhost:3000/
