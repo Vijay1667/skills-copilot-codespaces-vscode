@@ -2,10 +2,11 @@
 // To do this, we will use the Express web server framework for Node.js
 // http://expressjs.com/
 // To install Express:
+var express = require('express');
 // npm install --save express
 // Create a server.js file in the root of your application directory
 // In server.js, add the following code:
-var express = require('express');
+
 var app = express();
 var port = process.env.PORT || 3000;
 app.use(express.static(__dirname + '/app'));
